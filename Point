@@ -1,0 +1,158 @@
+/**
+ * 
+ * @author Jacob Hennessy
+ * @since October 5, 2014
+ * 
+ * Purpose: This is a class file for a Point, that will be used in the mathworks
+ * 	GUI to create lines, as defined in another class file.
+ * 
+ * I certify that this program is my own work.
+ */
+
+//Package declaration
+package edu.cofc.csci221.ui;
+
+//Point class declaration
+public class Point {
+	
+	//Initializing the instance variables
+	private int x = 0;
+	private int y = 0;
+	
+	/**
+	 * Constructor
+	 * 
+	 * precondition : none
+	 * postcondition : a point object will be created, and x and y values will be initialized to 0.
+	 */
+	public Point() {
+		this.setX(0);
+		this.setY(0);
+	}
+	
+	/**
+	 * Constructor 2
+	 * 
+	 * precondition : point cannot be null, and the x and y values fit within the GUI window.
+	 * postcondition : a point object will be created, and x and y values will be initialized to
+	 * 	either the argument values or 0 if the x and y do not fit within the window.
+	 */
+	public Point( Point point ) {
+		
+		if (point != null) {
+			if (point.getX() >= 0 && point.getX() <= GridConstants.MAX_PANEL_WIDTH) {
+				this.setX( point.getX() );
+			} 
+			else {
+				this.setX(0);
+			}
+			if (point.getY() >= 0 && point.getY() <= GridConstants.MAX_PANEL_HEIGHT) {
+				this.setY( point.getY() );
+			}
+			else {
+				this.setY(0);
+			}
+		}
+	}
+	
+	/**
+	 * Constructor 3
+	 * 
+	 * precondition : the x and y values from the point fit within the GUI window.
+	 * postcondition : a point object will be created, and x and y values will be initialized to
+	 * 	either the argument values or 0 if the x and y do not fit within the window.
+	 */
+	public Point (int xVal, int yVal) {
+		
+		if (xVal >= 0 && xVal <= GridConstants.MAX_PANEL_WIDTH) {
+			this.setX(xVal);
+		}
+		else {
+			this.setX(0);
+		}
+		if (yVal >= 0 && yVal <= GridConstants.MAX_PANEL_HEIGHT) {
+			this.setY(yVal);
+		}
+		else {
+			this.setY(0);
+		}
+	}
+	
+	/**
+	 * getX 
+	 * 
+	 * precondition : none
+	 * postcondition : returns int
+	 */
+	public int getX() {
+		return this.x;
+	}
+	
+	/**
+	 * getY 
+	 * 
+	 * precondition : none
+	 * postcondition : returns int
+	 */
+	public int getY() {
+		return this.y;
+	}
+	
+	/**
+	 * setX 
+	 * 
+	 * precondition : the x value passed is within the gui window
+	 * postcondition : point object will have its x value changed
+	 */
+	public void setX( int xVal ) {
+		 if (xVal >= 0 && xVal <= GridConstants.MAX_PANEL_WIDTH) {
+			 this.x = xVal;
+		 }
+		 else {
+			 this.x = 0;
+		 }
+	}
+	
+	/**
+	 * setY
+	 * 
+	 * precondition : the y value passed is within the gui window
+	 * postcondition : point object will have its y value changed
+	 */
+	public void setY( int yVal ) {
+		if (yVal >= 0 && yVal <= GridConstants.MAX_PANEL_HEIGHT) {
+			this.y = yVal;
+		}
+		else {
+			this.y = 0;
+		}
+	}
+	
+	/**
+	 * setPoint
+	 * 
+	 * precondition : point cannot be null, and the x and y values fit within the GUI window 
+	 * 	as according to the setX() and setY() methods
+	 * postcondition : point object will have its x and y values changed to those of the point object passed
+	 */
+	public void setPoint( Point p ) {
+		if (p != null) {
+			if (p.getX() >= 0 && p.getX() <= GridConstants.MAX_PANEL_WIDTH) {
+				this.setX( p.getX() );
+			}
+			else {
+				this.setX(0);
+			}
+			if (p.getY() >= 0 && p.getY() <= GridConstants.MAX_PANEL_HEIGHT) {
+				this.setY( p.getY() );
+			}
+			else {
+				this.setY(0);
+			}
+		}
+		else if (p == null) {
+			return;
+		}
+	}
+
+}
