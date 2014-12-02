@@ -1,0 +1,164 @@
+/**
+ * 
+ * 
+ * Purpose: This file will define the KochLine class, which will later be used to calculate the points necessary
+ * 			to create the Koch snowflake using the FractalPanel class.
+ * 
+ * I certify that this program is my own work.
+ */
+
+package edu.cofc.csci221.ui;
+
+public class KochLine extends Line {
+	
+	//Initializing the point instance variables, they will have a null value by default
+	private Point p1;
+	private Point p2;
+	private Point p3;
+	private Point p4;
+	private Point p5;
+	
+	/**
+	 * Constructor.
+	 * 
+	 * @param start
+	 * @param end
+	 * 
+	 * Precondition: None
+	 * Postcondition: A KochLine object will be created with the argument values set to the start and endpoints.
+	 */
+	public KochLine( Point start, Point end ) {
+		
+		//Calling the super constructor first
+		super(start, end);
+		
+		//Assigning the start and end point of the KochLine
+		// 	Using the SuperClass' (Line) getStart and getEnd methods
+		p1 = this.getStart();
+		p5 = this.getEnd();
+		
+	}
+	
+	/**
+	 * getLineA()
+	 * 
+	 * @return
+	 * 
+	 * Precondition: None.
+	 * Postcondition: The KochLine segment consisting of p1 and p2 will be returned as a new KochLine
+	 */
+	public KochLine getLineA() {
+		
+		//Creating a new segment of line from p1 to p2
+		KochLine segmentA = new KochLine( p1, p2 );
+		
+		return segmentA;
+		
+	}
+	
+	/**
+	 * getLineB()
+	 * 
+	 * @return
+	 * 
+	 * Precondition: None.
+	 * Postcondition: The KochLine segment consisting of p2 and p3 will be returned as a new KochLine
+	 */
+	public KochLine getLineB() {
+		
+		//Creating a new segment of line from p2 to p3
+		KochLine segmentB = new KochLine( p2, p3 );
+		
+		return segmentB;
+		
+	}
+	
+	/**
+	 * getLineC()
+	 * 
+	 * @return
+	 * 
+	 * Precondition: None.
+	 * Postcondition: The KochLine segment consisting of p3 and p4 will be returned as a new KochLine
+	 */
+	public KochLine getLineC() {
+		
+		//Creating a new segment of line from p3 to p4
+		KochLine segmentC = new KochLine( p3, p4 );
+		
+		return segmentC;
+		
+	}
+	
+	/**
+	 * getLineD()
+	 * 
+	 * @return
+	 * 
+	 * Precondition: None.
+	 * Postcondition: The KochLine segment consisting of p4 and p5 will be returned as a new KochLine
+	 */
+	public KochLine getLineD() {
+		
+		//Creating a new segment of line from p4 to p5
+		KochLine segmentD = new KochLine( p4, p5 );
+		
+		return segmentD;
+		
+	}
+	
+	/**
+	 * compute()
+	 * 
+	 * Precondition: None.
+	 * Postcondition: The additional points x and y in the KochLine are calculated and assigned to p2, p3, p4
+	 */
+	public void computeFractal() {
+		
+		//Defining the deltaX and deltaY which are used in several of the equations
+		int deltaX = p5.getX() - p1.getX();
+		int deltaY = p5.getY() - p1.getY();
+		
+		//Computing point 2, and then creating the actual point object (passing x2, y2 as args)
+		int x2 = p1.getX() + ( deltaX / 3 );
+		int y2 = p1.getY() + ( deltaY / 3 );
+		p2 = new Point( x2, y2 );
+		
+		//Computing point 3, and creating the object by casting the calculated double values as integers
+		double x3 = ( ( p1.getX() + p5.getX() ) / 2 ) + ( ( Math.sqrt(3) * (p1.getY() - p5.getY() ) ) / 6 );
+		double y3 = ( ( p1.getY() + p5.getY() ) / 2 ) + ( ( Math.sqrt(3) * (p5.getX() - p1.getX() ) ) / 6 );
+		p3 = new Point( (int)x3, (int)y3 );
+		
+		//Computing point 3, and passing the x and y values as arguments in the point constructor
+		int x4 = p1.getX() + ( ( 2 * deltaX ) / 3 );
+		int y4 = p1.getY() + ( ( 2 * deltaY ) / 3 );
+		p4 = new Point( x4, y4 );
+		
+	}
+	
+	/**
+	 * isKochLineValid()
+	 * 
+	 * @return
+	 * 
+	 * Precondition: None.
+	 * Postcondition: Returns a boolean value reflecting whether the KochLine segments are valid or not
+	 */
+	public boolean isKochLineValid() {
+		
+		//Checking conditions, making sure each line segment actually exists
+		if ( this.getLineA().isValid() && this.getLineB().isValid() && this.getLineC().isValid() && this.getLineD().isValid() ) {
+			
+			return true;
+			
+		}
+		else {
+			
+			return false;
+			
+		}
+		
+	}
+	
+
+}
